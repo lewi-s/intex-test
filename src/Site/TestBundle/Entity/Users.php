@@ -32,7 +32,8 @@ class Users
      * @ORM\JoinColumn(name="orgid", referencedColumnName="id", onDelete="CASCADE")
      */
     private $orgid;
-    
+
+    //gfdgdgd
     /**
      * @var string
      * 
@@ -288,4 +289,5 @@ class Users
     {
         return $this->orgid;
     }
+
 }
