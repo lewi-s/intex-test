@@ -1,0 +1,32 @@
+{% if app.session.flashbag.has('alert') %}
+    <div class="n_ok">
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <p>{{flashMessage}}</p>
+    {% endfor %}
+    </div>
+    <div class="clear"></div>
+    <div class="sep"></div>
+{% endif %}
+
+{% if app.session.flashbag.has('notice') %}
+    <div class="n_warning">
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <p>{{flashMessage}}</p>
+    {% endfor %}
+    </div>
+    <div class="clear"></div>
+    <div class="sep"></div>
+{% endif %}
+
+{% if app.session.flashbag.has('error') %}
+    <div class="n_error">
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <p>{{flashMessage}}</p>
+    {% endfor %}
+    </div>
+    <div class="clear"></div>
+    <div class="sep"></div>
+{% endif %}
+
+
+<div id="mes" style="display: none"> <p>Attention notification.</p>  </div>   

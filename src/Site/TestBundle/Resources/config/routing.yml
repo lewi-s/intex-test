@@ -1,0 +1,35 @@
+site_test_homepage:
+    path:     /
+    defaults: { _controller: SiteTestBundle:Organizations:ShowList }
+
+   
+_organization_users:
+    path:  /organization/{id}
+    defaults: { _controller: SiteTestBundle:Organizations:ShowOrganizationUsers , id: null }
+    requirements:
+        id:  \d+
+
+_edit_organization:
+    path:  /organization/edit/{id}
+    defaults: { _controller: SiteTestBundle:Organizations:Edit, id: null }
+    
+_delete_organization:
+    path:  /organization/delete/{id}
+    defaults: { _controller: SiteTestBundle:Organizations:Delet, id: null }
+    
+_show_users:
+    path:  /users
+    defaults: { _controller: SiteTestBundle:Users:ShowList }
+    
+_edit_users:
+    path:  /users/edit/{id}
+    defaults: { _controller: SiteTestBundle:Users:Edit, id: null }
+    
+_delete_users:
+    path:  /users/delete/{id}
+    defaults: { _controller: SiteTestBundle:Users:Delet, id: null }  
+    
+_xml_loader:
+    path:  /upload
+    defaults: { _controller: SiteTestBundle:XmlLoader:Load}        
+    

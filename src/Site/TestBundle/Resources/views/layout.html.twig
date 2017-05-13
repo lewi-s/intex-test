@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="robots" content="noindex, nofollow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Тестовое задание</title>
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/sitetest/css/style.css') }}" media="screen" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/sitetest/css/popup.css') }}" media="screen" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/sitetest/css/bootstrap.css') }}" media="screen" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/sitetest/css/navi.css') }}" media="screen" />
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"></link>
+
+<link rel="stylesheet" href="{{ asset('bundles/sitetest/css/jquery-ui.css') }}" />
+<!--script src="{{ asset('bundles/sitetest/js/jquery-1.9.1.js') }}"></script-->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="{{ asset('bundles/sitetest/js/jquery-ui.js') }}"></script>
+<script src="{{ asset('bundles/sitetest/js/scripts.js') }}"></script>
+
+
+    {% block head %}
+    {% endblock %}
+</head>
+<body>   
+    <div class="wrap">
+    <div id="header">
+        <div id="top">
+            <div class="align-center">
+                <h1><strong>Организации и Пользователи - панель управления</strong> </h1>
+            </div>
+        </div>
+    </div>    
+    <div id="content">
+        <div id="sidebar">
+            <div class="box">
+                <div class="h_title">&#8250; Меню</div>
+                <ul id="home">
+                    <li class="b1"><a class="icon category" href="{{ path('site_test_homepage') }}">Организации</a></li>
+                    <li class="b2"><a class="icon users" href="{{ path('_show_users') }}" >Пользователи</a></li>
+                    <li class="b1"><a class="icon save" href="{{ path('_xml_loader') }}" >Импортировать файл</a></li>
+                </ul>
+            </div>
+	</div>
+                
+        <div id="main">
+            <div class="full_w">
+               
+            {% block content %}
+                
+            {% endblock %}
+            </div>        
+              
+	</div>
+	<div class="clear"></div>
+    </div>
+    </div>
+</body>        
+</html>        

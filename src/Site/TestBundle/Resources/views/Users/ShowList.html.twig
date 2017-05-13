@@ -1,0 +1,90 @@
+{% set currentPath = app.request.uri %}
+
+{% set direction = '-'~pagination.getDirection() %}
+
+{% set lastnameDirection ='' %}
+{% if pagination.isSorted('c.lastname') %}  {% set lastnameDirection = direction %} {% endif %}
+
+{% set firstnameDirection ='' %}
+{% if pagination.isSorted('c.firstname') %}  {% set firstnameDirection = direction %} {% endif %}
+
+{% set middlenameDirection ='' %}
+{% if pagination.isSorted('c.middlename') %}  {% set middlenameDirection = direction %} {% endif %}
+
+{% set datebirthDirection ='' %}
+{% if pagination.isSorted('c.datebirth') %}  {% set datebirthDirection = direction %} {% endif %}
+
+{% set innDirection ='' %}
+{% if pagination.isSorted('c.inn') %}  {% set innDirection = direction %} {% endif %}
+
+{% set snilsDirection ='' %}
+{% if pagination.isSorted('c.snils') %}  {% set snilsDirection = direction %} {% endif %}
+
+{% extends 'SiteTestBundle::layout.html.twig' %}
+
+
+{% block content %}
+    <div class="h_title">
+        {% set paramslink = {} %}
+        {% set orgid ='' %}
+        {% if organization is defined %}
+           Список пользователей для {{organization.displayname}}
+           {% set orgid = organization.id %}
+        {% else %}
+            Пользователи
+        {% endif %}
+    </div>
+    <form action="#" id="adminform"  method="post" name="adminform" >
+    <div class="entry">
+        <button type="submit"  class="button add" onclick="document.adminform.action='{{ path('_edit_users') }}';" title="Добавить пользователя">Добавить пользователя</button>
+        <a class="button cancel"  onclick="DeletAll('{{ path('_delete_users') }}');" href="#">Удалить</a>
+        <div class="clear"></div>
+        <div class="sep"></div>
+    </div>
+    {% include 'SiteTestBundle:Alert:Alert.html.twig' %}
+        
+    <table>
+        <thead>
+            <tr>
+                
+                <th scope="col" style="width: 16px;"><input type="checkbox" onclick="SelectAll(this);"></th>
+                <th scope="col">{{ knp_pagination_sortable(pagination, 'Фамилия', 'c.lastname') }}<i class="fa fa-sort{{ lastnameDirection }}" aria-hidden="true"></i></th>
+                <th scope="col">{{ knp_pagination_sortable(pagination, 'Имя', 'c.firstname') }}<i class="fa fa-sort{{ firstnameDirection }}" aria-hidden="true"></i></th>
+                <th scope="col">{{ knp_pagination_sortable(pagination, 'Отчество', 'c.middlename') }}<i class="fa fa-sort{{ middlenameDirection }}" aria-hidden="true"></i></th>
+                <th scope="col">{{ knp_pagination_sortable(pagination, 'Дата рождения', 'c.datebirth') }}<i class="fa fa-sort{{ datebirthDirection }}" aria-hidden="true"></i></th>
+                <th scope="col">{{ knp_pagination_sortable(pagination, 'ИНН', 'c.inn') }}<i class="fa fa-sort{{ innDirection }}" aria-hidden="true"></i></th>
+                <th scope="col">{{ knp_pagination_sortable(pagination, 'СНИЛС', 'c.snils') }}<i class="fa fa-sort{{ snilsDirection }}" aria-hidden="true"></i></th>
+                <th scope="col">Наименование Организации</th>
+                
+                <th scope="col" style="width: 65px;">Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+                  
+            {% for item in pagination %}
+                <tr>
+                    <td class="align-center"><input type="checkbox" name="chb[]" value="{{ item.id }}" class="cb"></td>
+                    <td>{{ item.lastname }}</td>                 
+                    <td>{{item.firstname}}</td>
+                    <td>{{item.middlename}}</td>
+                    <td>{{item.datebirth|date('Y-m-d')}}</td>
+                    <td>{{item.inn }}</td>
+                    <td>{{item.snils }}</td>
+                    <td>{{item.orgid.displayname }}</td>
+
+                    <td>
+                        <button type="submit"  class="table-icon edit" onclick="document.adminform.action='{{ path('_edit_users', {'id': item.id}) }}';" title="Редактировать"></button>
+                        <button type="submit"  class="table-icon delete deletAll"  onclick="document.adminform.action='{{ path('_delete_users', {'id': item.id}) }}';" title="Удалить"></button>
+                    </td>
+                </tr>
+            {% endfor %}
+            <input type="hidden" name="orgid" value="{{orgid}}">
+            <input type="hidden" name="req_path" value="{{currentPath}}">
+	</tbody>
+    </table>
+    </form>         
+    <div class="entry">
+            {{ knp_pagination_render(pagination) }}
+        <div class="sep"></div>	
+    </div>
+{% endblock %}

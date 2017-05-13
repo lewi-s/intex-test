@@ -1,0 +1,63 @@
+{% set currentPath = app.request.uri %}
+{% set direction = '-'~pagination.getDirection() %}
+
+{% set displayNameDirection ='' %}
+{% if pagination.isSorted('c.displayName') %}  {% set displayNameDirection = direction %} {% endif %}
+
+{% set OgrnDirection ='' %}
+{% if pagination.isSorted('c.ogrn') %}  {% set OgrnDirection = direction %} {% endif %}
+  
+{% set oktmoDirection ='' %}
+{% if pagination.isSorted('c.oktmo') %}  {% set oktmoDirection = direction %} {% endif %}
+  
+
+
+{% extends 'SiteTestBundle::layout.html.twig' %}
+
+
+{% block content %}
+    <div class="h_title">Организации</div>
+    <form action="#" id="adminform" name="adminform"  method="post" >  
+    <div class="entry">
+        <button type="submit"  class="button add" onclick="document.adminform.action='{{ path('_edit_organization') }}';" title="Добавить организацию">Добавить организацию</button>
+        <a class="button cancel" onclick="DeletAll('{{ path('_delete_organization') }}');" href="#">Удалить</a>
+        <div class="clear"></div>
+        <div class="sep"></div>
+    </div>
+    {% include 'SiteTestBundle:Alert:Alert.html.twig' %}
+        
+    <table>
+        <thead>
+            <tr>
+                <th scope="col"  style="width: 16px;"><input type="checkbox" onclick="SelectAll(this);"></th>
+                <th scope="col">{{ knp_pagination_sortable(pagination, 'Наименование', 'c.displayName') }}<i class="fa fa-sort{{ displayNameDirection }}" aria-hidden="true"></i></th>
+                <th scope="col">{{ knp_pagination_sortable(pagination, 'ОГРН', 'c.ogrn') }} <i class="fa fa-sort{{ OgrnDirection }}" aria-hidden="true"></i></th>
+		<th scope="col">{{ knp_pagination_sortable(pagination, 'ОКТМО', 'c.oktmo') }} <i class="fa fa-sort{{ oktmoDirection }}" aria-hidden="true"></i></th>
+                <th scope="col" style="width: 90px;">Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+                
+            {% for item in pagination %}
+                <tr>
+                    <td class="align-center"><input type="checkbox" name="chb[]" value="{{ item.id }}" class="cb"></td>
+                    <td>{{ item.displayname }}</td>                 
+                    <td>{{item.ogrn}}</td>
+                    <td>{{item.oktmo }}</td>
+                    <td>
+                        <a href="{{ path('_organization_users', {'id': item.id}) }}" class="table-icon users" title="Список пользователей для {{ item.displayname }}"></a> 
+                         <button type="submit"  class="table-icon edit" onclick="document.adminform.action='{{ path('_edit_organization', {'id': item.id}) }}';" title="Редактировать"></button>
+                        <button type="submit"  class="table-icon delete deletAll"  onclick="document.adminform.action='{{ path('_delete_organization', {'id': item.id}) }}';" title="Удалить"></button>
+                    </td>
+                </tr>
+            {% endfor %}
+            
+	</tbody>
+    </table>
+        <input type="hidden" name="req_path" value="{{currentPath}}">
+    </form>         
+    <div class="entry">
+            {{ knp_pagination_render(pagination) }}
+        <div class="sep"></div>	
+    </div>
+{% endblock %}

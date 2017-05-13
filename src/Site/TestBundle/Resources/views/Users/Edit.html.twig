@@ -1,0 +1,45 @@
+{% extends 'SiteTestBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="h_title">Редактор Пользователя</div> 
+    {{form_start(form)}}
+        <div class="element">
+            {{ form_label(form.lastname) }}
+            {% if form_errors(form.lastname) %}<div class="n_error ul">{{ form_errors(form.lastname) }}</div> <div class="clear"></div>{% endif %}
+            {{ form_widget(form.lastname, { 'attr': {'class': 'span6'} }) }}
+            
+            {{ form_label(form.firstname) }}
+            {% if form_errors(form.firstname) %}<div class="n_error ul">{{ form_errors(form.firstname) }}</div> <div class="clear"></div>{% endif %}
+            {{ form_widget(form.firstname, { 'attr': {'class': 'span6'} }) }}
+            
+            {{ form_label(form.middlename) }}
+            {% if form_errors(form.middlename) %}<div class="n_error ul">{{ form_errors(form.middlename) }}</div> <div class="clear"></div>{% endif %}
+            {{ form_widget(form.middlename, { 'attr': {'class': 'span6'} }) }}
+
+            {{ form_label(form.datebirth) }}
+            {% if form_errors(form.datebirth) %}<div class="n_error ul">{{ form_errors(form.datebirth) }}</div> <div class="clear"></div>{% endif %}
+            {{ form_widget(form.datebirth, { 'attr': {'class': 'date'} }) }}
+        </div>  
+        <div class="element">
+            {{ form_label(form.inn) }}
+            {% if form_errors(form.inn) %}<div class="n_error ul">{{ form_errors(form.inn) }}</div> <div class="clear"></div>{% endif %}
+            {{ form_widget(form.inn, { 'attr': {'class': 'span4'} }) }}
+            
+            {{ form_label(form.snils) }}
+            {% if form_errors(form.snils) %}<div class="n_error ul">{{ form_errors(form.snils) }}</div> <div class="clear"></div>{% endif %}
+            {{ form_widget(form.snils, { 'attr': {'class': 'span4'} }) }}
+
+        </div> 
+        <div class="element">
+            {{ form_label(form.orgid) }}
+            {{ form_errors(form.orgid) }}
+            {{ form_widget(form.orgid, { 'attr': {'class': 'span4'} }) }}
+        </div>    
+	<div class="entry">
+            {{ form_rest(form) }}
+            {{ form_widget(form.save) }}
+            <button class="cancel" type="button" onClick="window.location.href='{{ req_path }}'">Отменить</button>        
+	</div>
+        <input type="hidden" name="req_path" value="{{ req_path }}">
+    {{form_end(form)}}
+{% endblock %}

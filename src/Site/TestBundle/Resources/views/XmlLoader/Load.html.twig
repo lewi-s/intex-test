@@ -1,0 +1,19 @@
+{% extends 'SiteTestBundle::layout.html.twig' %}
+
+
+{% block content %}
+        {% include 'SiteTestBundle:Alert:Alert.html.twig' %}
+    <div class="h_title">Импорт Xml файла</div>  
+    {{form_start(form)}}
+        <div class="element">
+            {{ form_label(form.attachment) }}
+            {{ form_errors(form.attachment) }}
+            {{ form_widget(form.attachment, { 'attr': {'class': 'span6'} }) }}
+        </div>  
+         
+	<div class="entry">
+            {{ form_rest(form) }}
+            {{ form_widget(form.save) }}
+	</div>
+    {{form_end(form)}}
+{% endblock %}

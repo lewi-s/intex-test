@@ -1,0 +1,26 @@
+{% extends 'SiteTestBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="h_title">Редактор Организации</div>  
+    {{form_start(form)}}
+        <div class="element">
+            {{ form_label(form.displayName) }}
+            {% if form_errors(form.displayName) %}<div class="n_error ul">{{ form_errors(form.displayName) }}</div> <div class="clear"></div>{% endif %}
+            {{ form_widget(form.displayName, { 'attr': {'class': 'span6'} }) }}
+            
+            {{ form_label(form.ogrn) }}
+            {% if form_errors(form.ogrn) %}<div class="n_error ul">{{ form_errors(form.ogrn) }}</div> <div class="clear"></div>{% endif %}
+            {{ form_widget(form.ogrn, { 'attr': {'class': 'span4'} }) }}
+            
+            {{ form_label(form.oktmo) }}
+            {% if form_errors(form.oktmo) %}<div class="n_error ul">{{ form_errors(form.oktmo) }}</div> <div class="clear"></div>{% endif %}
+            {{ form_widget(form.oktmo, { 'attr': {'class': 'span4'} }) }}
+        </div> 
+        <div class="entry">
+            {{ form_rest(form) }}
+            {{ form_widget(form.save) }}
+            <button class="cancel" type="button" onClick="window.location.href='{{ req_path }}'">Отменить</button>        
+	</div>
+        <input type="hidden" name="req_path" value="{{ req_path }}">
+    {{form_end(form)}}
+{% endblock %}

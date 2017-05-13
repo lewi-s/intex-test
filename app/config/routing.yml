@@ -1,0 +1,3 @@
+site_test:
+    resource: "@SiteTestBundle/Resources/config/routing.yml"
+    prefix:   /
